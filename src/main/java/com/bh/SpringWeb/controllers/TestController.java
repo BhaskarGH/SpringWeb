@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.reactive.function.client.WebClient;
 
+import java.io.IOException;
+
 @RestController
 public class TestController {
 
@@ -31,7 +33,7 @@ public class TestController {
         return id;
     }
     @PostMapping (path = "/upload", consumes = MediaType.MULTIPART_FORM_DATA_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<String> upload (@RequestPart("file") MultipartFile multipartFile){
+    public ResponseEntity<String> upload (@RequestPart("file") MultipartFile multipartFile) throws IOException {
         return new ResponseEntity<>(docService.upload (multipartFile),HttpStatus.OK);
 
     }
